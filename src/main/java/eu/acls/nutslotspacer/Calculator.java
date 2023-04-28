@@ -12,12 +12,15 @@ public class Calculator {
   private double edgeSpacingTreble;
   private double nutWidth;
   private boolean useStringCenterToFingerboardEdge; // default use string edge instead of center
+  private boolean useInchesAsInput; // default use millimeters instead of inches
 
   // In 1000s of an inch
   private List<Integer> stringDiameters = new ArrayList<>();
 
-  public Calculator(int nStrings, double edgeSpacingBass, double edgeSpacingTreble, double nutWidth, boolean useStringCenterToFingerboardEdge) {
-    this.nStrings = nStrings;
+  public Calculator() {
+  }
+
+  public Calculator(double edgeSpacingBass, double edgeSpacingTreble, double nutWidth, boolean useStringCenterToFingerboardEdge) {
     this.edgeSpacingBass = edgeSpacingBass;
     this.edgeSpacingTreble = edgeSpacingTreble;
     this.nutWidth = nutWidth;
@@ -64,6 +67,14 @@ public class Calculator {
     this.useStringCenterToFingerboardEdge = useStringCenterToFingerboardEdge;
   }
 
+  public boolean isUseInchesAsInput() {
+    return useInchesAsInput;
+  }
+
+  public void setUseInchesAsInput(boolean useInchesAsInput) {
+    this.useInchesAsInput = useInchesAsInput;
+  }
+
   public List<Integer> getStringDiameters() {
     return stringDiameters;
   }
@@ -82,6 +93,9 @@ public class Calculator {
 
     Result result = new Result();
 
+    checkInchesAsInput();
+
+    nStrings = stringDiameters.size();
     double stringArea = nutWidth - edgeSpacingBass - edgeSpacingTreble;
     double totalStringSpacing = subtractStringDiameters(stringArea);
 
@@ -95,6 +109,15 @@ public class Calculator {
     calculateStringCenterLinePositions(result);
 
     return result;
+  }
+
+  private void checkInchesAsInput() {
+
+    if (isUseInchesAsInput()) {
+      nutWidth = Util.inchesToMillimeters(nutWidth);
+      edgeSpacingBass = Util.inchesToMillimeters(edgeSpacingBass);
+      edgeSpacingTreble = Util.inchesToMillimeters(edgeSpacingTreble);
+    }
   }
 
   private void calculateStringCenterLinePositions(Result result) {
