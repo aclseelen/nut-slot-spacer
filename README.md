@@ -38,6 +38,24 @@ The number of strings is derived from the number of string diameters entered.
 * List of string center line distances from treble edge of the nut
 * String spacing calculated/used (space between outer edges of two neighbouring strings, equal for all spacings between all strings)
 
-## Building the/an application
+## Building the application
 
-Currently, the code used for the calculations is ready to be used. However, there is no application included yet. Soon, a command line app, a web app, or a Java GUI app will become available.
+The package `eu.acls.nutslotspacer` contains the logic, which can be used in any application, like for example a command line app (not included). A Java Swing desktop app is available at `eu.acls.nutslotspacer.swingapp`. An executable `*.jar` can be build through maven:
+
+```
+$ mvn package
+```
+
+This wil generate a `jar` with dependencies, e.g. `nut-slot-spacer-1.0-SNAPSHOT-jar-with-dependencies.jar` that can be run by a Java Runtime Environment. Installing such a JRE is essential to run Java desktop applications, like this Nut Slot Spacer. Therefore, it works operating system independently, so the same build can be used on Linux, FreeBSD, Windows, or Mac, as long as there is a JRE available for your OS.
+
+### Run the Swing app
+
+Depending on your OS, it might work differently. On some just double-clicking the icon might work (your OS might run the app immediately or will ask you to install a Java Runtime Environment, in order to be able to run it). I guess it works that way on Windows, for example.
+
+On Linux (unix based systems in general), you can run the app from your command line terminal, e.g.:
+
+```
+$ java -jar nut-slot-spacer-v0.1.0-jar-with-dependencies.jar
+```
+
+Double-clicking would probably open an archive manager as default app for archives like `jar`, `war`, or `tar`. Right-clicking might give you the option to open the file with a Java Runtime Environment, like for example `OpenJDK Java 17 Runtime` in my case.
