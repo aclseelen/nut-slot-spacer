@@ -50,7 +50,13 @@ public class NutSlotSpacerApp extends JFrame {
 
   private Color backgroundColor = new Color(0xeeeeee);
 
+  private String donateLink;
+  private String projectPageLink;
+
   public NutSlotSpacerApp() {
+
+    projectPageLink = "https://github.com/aclseelen/nut-slot-spacer#readme";
+    donateLink = "http://acls.eu/products/os-software/#donate";
 
     aboutPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -116,7 +122,7 @@ public class NutSlotSpacerApp extends JFrame {
 
     btnDonate.addActionListener(actionEvent -> {
       try {
-        URI uri = new URI("https://github.com/sponsors/aclseelen");
+        URI uri = new URI(donateLink);
         openWebpage(uri);
       } catch (URISyntaxException | IOException e) {
         e.printStackTrace();
@@ -125,7 +131,7 @@ public class NutSlotSpacerApp extends JFrame {
 
     btnAbout.addActionListener(actionEvent -> {
       try {
-        URI uri = new URI("https://github.com/aclseelen/nut-slot-spacer#readme");
+        URI uri = new URI(projectPageLink);
         openWebpage(uri);
       } catch (URISyntaxException | IOException e) {
         e.printStackTrace();
